@@ -1,12 +1,21 @@
 import random
+
+
+
+
 class Vendor:
     def __init__(self,stage):
-        self.vendor = {}
+        self.vendor = []
         self.loot_table = LootTableModel().loot_table
         self.stage = stage
     def select_items(self):
         if self.stage == 1:
-            for item_name, item_type in self.loot_table.items():
+            for item in self.loot_table:
+                for item_name, item_info in item.items():
+                    for rarity,rarity_type in item_info.items():
+                        if rarity_type == 'common':
+                            self.vendor.append(item)
+                            print(self.vendor)
 
 
 

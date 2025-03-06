@@ -1,5 +1,7 @@
 import random
 
+from data_model import LootTableModel, Vendor
+
 player_stats = {
     'You':{
         'stats':{'health':100,'armor':5,'healing per round':2,'damage':20},
@@ -55,3 +57,8 @@ vendor = {}
 storage = {}
 player_equip = {}
 player_backpack = {}
+
+
+all_items = LootTableModel()
+vendom_class = Vendor(1)
+vendom_class.select_items()
