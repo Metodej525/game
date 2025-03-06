@@ -13,9 +13,9 @@ class Vendor:
             for item in self.loot_table:
                 for item_name, item_info in item.items():
                     for rarity,rarity_type in item_info.items():
-                        if rarity_type == 'common':
+                        if item[item_name][rarity] == 'common':
                             self.vendor.append(item)
-                            print(self.vendor)
+        print(self.vendor)
 
 
 
