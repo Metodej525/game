@@ -118,7 +118,22 @@ class EnemyManager:
 ##########################################################################
 ##########################################################################
 ##########################################################################
-#player data classes
+#encounter,vendor,storage data classes
+class Encounter:
+    def __init__(self):
+        self.encounter = []
+
+class Vendor:
+    def __init__(self):
+        self.vendor = []
+class Storage:
+    def __init__(self):
+        self.storage = []
+##########################################################################
+##########################################################################
+##########################################################################
+##########################################################################
+#player stats data classes
 @dataclass
 class PlayerAbilities:
     ability_name: Optional[str] = None
@@ -140,6 +155,6 @@ class PlayerAll:
 class Player:
     def __init__(self):
         self.player_stats = PlayerAll("Metod",PlaterStats(100,5,2,20),PlayerAbilities())
-player = Player().player_stats.name
-print(player)
-
+player = Player().player_stats.abilities.ability_name
+if player is None:
+    print('There is no ability')
