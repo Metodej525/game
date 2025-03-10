@@ -170,3 +170,11 @@ class PlayerEquipTable:
                                                pants=[],
                                                helmet=[],
                                                consumables=[])
+############################################
+# player bag class
+@dataclass
+class PlayerBag:
+    bag: List[Dict[Any, Any]]
+class PlayerBagTable:
+    def __init__(self):
+        self.bag = PlayerBag(bag=[])
