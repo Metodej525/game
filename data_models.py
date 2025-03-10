@@ -153,8 +153,8 @@ class PlayerAll:
 
 class Player:
     def __init__(self):
-        self.player_stats = PlayerAll("Metod",PlaterStats(100,5,2,20),PlayerAbilities())
-##########################################
+        self.player_stats = PlayerAll("Alex",PlaterStats(100,5,2,20),PlayerAbilities())
+##########################################################################
 #player equip
 @dataclass
 class PlayerEquipAll:
@@ -170,7 +170,7 @@ class PlayerEquipTable:
                                                pants=[],
                                                helmet=[],
                                                consumables=[])
-############################################
+##########################################################################
 # player bag class
 @dataclass
 class PlayerBag:
