@@ -1,7 +1,7 @@
 import random
 from dataclasses import dataclass
 
-from typing import List, Optional
+from typing import List, Optional,Dict,Any
 ##########################################################################
 ##########################################################################
 ##########################################################################
@@ -122,7 +122,6 @@ class EnemyManager:
 class Encounter:
     def __init__(self):
         self.encounter = []
-
 class Vendor:
     def __init__(self):
         self.vendor = []
@@ -155,6 +154,19 @@ class PlayerAll:
 class Player:
     def __init__(self):
         self.player_stats = PlayerAll("Metod",PlaterStats(100,5,2,20),PlayerAbilities())
-player = Player().player_stats.abilities.ability_name
-if player is None:
-    print('There is no ability')
+##########################################
+#player equip
+@dataclass
+class PlayerEquipAll:
+    weapon: List[Dict[Any,Any]]
+    chestplate: List[Dict[Any,Any]]
+    pants: List[Dict[Any,Any]]
+    helmet: List[Dict[Any,Any]]
+    consumables: List[Dict[Any,Any]]
+class PlayerEquipTable:
+    def __init__(self):
+        self.playerEquipTable = PlayerEquipAll(weapon=[],
+                                               chestplate=[],
+                                               pants=[],
+                                               helmet=[],
+                                               consumables=[])
