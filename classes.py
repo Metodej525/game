@@ -11,7 +11,7 @@ class MoveItem:
         self.source = setup.source
         self.target = setup.target
         self.item = setup.item
-    def move(self):
+    def move(self)-> bool:
         if self.item in self.source:
             item_index = self.source.index(self.item)
             item_move = self.source[item_index].copy()
