@@ -158,11 +158,11 @@ class Player:
 #player equip
 @dataclass
 class PlayerEquipAll:
-    weapon: List[Dict[Any,Any]]
-    chestplate: List[Dict[Any,Any]]
-    pants: List[Dict[Any,Any]]
-    helmet: List[Dict[Any,Any]]
-    consumables: List[Dict[Any,Any]]
+    weapon: List[Weapon]
+    chestplate: List[Armor]
+    pants: List[Armor]
+    helmet: List[Armor]
+    consumables: List[Consumable]
 class PlayerEquipTable:
     def __init__(self):
         self.playerEquipTable = PlayerEquipAll(weapon=[],
