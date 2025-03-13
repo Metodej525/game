@@ -34,3 +34,5 @@ class VendorGen():
             for item in category:
                 if item.rarity == "common":
                     gen_items.append(item)
+        vendor_sample = random.sample(gen_items,4)
+        return vendor_sample
