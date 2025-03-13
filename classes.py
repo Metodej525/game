@@ -23,7 +23,7 @@ class MoveItem:
             return True
         return False
 
-class VendorGen():
+class VendorGen:
     def __init__(self,stage):
         self.vendor_table = Vendor().vendor
         self.loot_table = LootManager().loot_table
