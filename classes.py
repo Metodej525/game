@@ -1,7 +1,7 @@
 import random
-from dataclasses import dataclass, field
-from typing import List, Optional,Dict,Any
-from data_models import Vendor, LootManager, EnemyData, EnemyTable
+from dataclasses import dataclass
+from typing import List,Dict,Any
+from data_models import Vendor, LootManager
 
 
 @dataclass
@@ -24,8 +24,8 @@ class MoveItem:
         return False
 
 class VendorGen():
-    def __init__(self,vendor_table,LootManager,stage):
-        self.vendor_table = vendor_table
+    def __init__(self,stage):
+        self.vendor_table = Vendor().vendor
         self.loot_table = LootManager().loot_table
         self.stage = stage
     def generate_items(self):
