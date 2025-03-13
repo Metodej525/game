@@ -92,7 +92,6 @@ class EnemyData:
 @dataclass
 class EnemyTable:
     enemy : List[EnemyData]
-
 class EnemyManager:
     def __init__(self):
         self.enemy_list = EnemyTable(enemy =[

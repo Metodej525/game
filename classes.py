@@ -1,5 +1,8 @@
-from dataclasses import dataclass
+import random
+from dataclasses import dataclass, field
 from typing import List, Optional,Dict,Any
+from data_models import Vendor, LootManager, EnemyData, EnemyTable
+
 
 @dataclass
 class MoveItemSetup:
@@ -19,3 +22,15 @@ class MoveItem:
             self.target.append(item_move)
             return True
         return False
+
+class VendorGen():
+    def __init__(self,vendor_table,LootManager,stage):
+        self.vendor_table = vendor_table
+        self.loot_table = LootManager().loot_table
+        self.stage = stage
+    def generate_items(self):
+        gen_items = []
+        for category in self.loot_table:
+            for item in category:
+                if item.rarity == "common":
+                    gen_items.append(item)
