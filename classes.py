@@ -2,6 +2,10 @@ import random
 from dataclasses import dataclass
 from typing import List,Dict,Any
 from data_models import Vendor, LootManager
+class SelectItem:
+    def __init__(self):
+        self.item_select = input("Jaky item chces presunout?").lower()
+    def select(self):
 
 
 @dataclass
