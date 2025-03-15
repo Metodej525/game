@@ -1,18 +1,38 @@
 import random
 from dataclasses import dataclass
 from typing import List,Dict,Any
-from data_models import Vendor, LootManager
-class SelectItem:
+from data_models import Vendor, LootManager, PlayerBagTable, Storage
+
+
+class SelectMoveItem:
     def __init__(self):
         self.item_select = input("Jaky item chces presunout?").lower()
-    def select(self):
-
-
+class SelectMoveSource:
+    def __init__(self):
+        self.source_select = input("Odkud to chces presunout? backpack/storage").lower()
+        if self.source_select == "backpack":
+            self.source_select = PlayerBagTable().bag
+        elif self.source_select == "storage":
+            self.source_select = Storage().storage
+        else:
+            self.source_select = None
+            print("Invalid input")
+class SelectMoveTarget:
+    def __init__(self):
+        self.source_target = input("Kam chces presunout? backpack/storage").lower()
+        if self.source_target == "backpack":
+            self.source_target = PlayerBagTable().bag
+        elif self.source_target == "storage":
+            self.source_target = Storage().storage
+        else:
+            self.source_target = None
+            print("Invalid input")
 @dataclass
 class MoveItemSetup:
     source: List[Dict[str, Any]]
     target: List[Dict[str, Any]]
     item: Dict[str, Any]
+    item_select: str
 class MoveItem:
     def __init__(self,setup: MoveItemSetup):
         self.source = setup.source
