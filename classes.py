@@ -66,9 +66,25 @@ class VendorGen:
         return vendor_sample
 @dataclass
 class PlayerStatsSetup:
-    stats: Player().player_stats
-    equip: PlayerEquipTable().player_equip_eable
+    stats: Player
+    equip: PlayerEquipTable
 class PlayerStatSum:
     def __init__(self,player: PlayerStatsSetup):
-        self.player_stats = PlayerStatsSetup.stats
-        self.player_equip = PlayerStatsSetup.equip
+        self.player_stats = player.stats.player_stats
+        self.player_equip = player.equip.player_equip_eable
+    def summarize(self):
+        total_health = self.player_stats.health
+        total_armor = self.player_stats.armor
+        total_healing = self.player_stats.healing_per_round
+        total_damage = self.player_stats.damage
+        total_damage += self.player_equip.weapon.damage
+
+        total_armor += self.player_equip.chestplate.defense
+        total_armor += self.player_equip.pants.defense
+        total_armor += self.player_equip.helmet.defense
+
+
+
+test_test = PlayerStatsSetup(Player(),PlayerEquipTable())
+test = PlayerStatSum(test_test)
+test.summarize()
