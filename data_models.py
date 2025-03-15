@@ -164,7 +164,7 @@ class PlayerEquipAll:
     consumables: List[Consumable]
 class PlayerEquipTable:
     def __init__(self):
-        self.playerEquipTable = PlayerEquipAll(weapon=[],
+        self.player_equip_eable = PlayerEquipAll(weapon=[],
                                                chestplate=[],
                                                pants=[],
                                                helmet=[],

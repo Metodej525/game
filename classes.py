@@ -1,7 +1,7 @@
 import random
 from dataclasses import dataclass
 from typing import List,Dict,Any
-from data_models import Vendor, LootManager, PlayerBagTable, Storage
+from data_models import Vendor, LootManager, PlayerBagTable, Storage, Player, PlayerEquipTable
 
 
 class SelectMoveItem:
@@ -52,11 +52,23 @@ class VendorGen:
         self.vendor_table = Vendor().vendor
         self.loot_table = LootManager().loot_table
         self.stage = stage
+        self.rarity_select = None
+    def rarity_table(self):
+        rarities = ["common","rare","epic","legendary"]
+        self.rarity_select = rarities[self.stage]
     def generate_items(self):
         gen_items = []
         for category in self.loot_table:
             for item in category:
-                if item.rarity == "common":
+                if item.rarity == self.rarity_select:
                     gen_items.append(item)
         vendor_sample = random.sample(gen_items,4)
         return vendor_sample
+@dataclass
+class PlayerStatsSetup:
+    stats: Player().player_stats
+    equip: PlayerEquipTable().player_equip_eable
+class PlayerStatSum:
+    def __init__(self,player: PlayerStatsSetup):
+        self.player_stats = PlayerStatsSetup.stats
+        self.player_equip = PlayerStatsSetup.equip
