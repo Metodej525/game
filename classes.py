@@ -73,15 +73,19 @@ class PlayerStatSum:
         self.player_stats = player.stats.player_stats
         self.player_equip = player.equip.player_equip_eable
     def summarize(self):
-        total_health = self.player_stats.health
-        total_armor = self.player_stats.armor
-        total_healing = self.player_stats.healing_per_round
-        total_damage = self.player_stats.damage
-        total_damage += self.player_equip.weapon.damage
+        total_health = self.player_stats.stats.health
+        total_armor = self.player_stats.stats.armor
+        total_healing = self.player_stats.stats.healing_per_round
+        total_damage = self.player_stats.stats.damage
 
-        total_armor += self.player_equip.chestplate.defense
-        total_armor += self.player_equip.pants.defense
-        total_armor += self.player_equip.helmet.defense
+        if self.player_equip.weapon:
+            total_damage += self.player_equip.weapon.damage
+        if self.player_equip.chestplate:
+            total_armor += self.player_equip.chestplate.defense
+        if self.player_equip.pants:
+            total_armor += self.player_equip.pants.defense
+        if self.player_equip.helmet:
+            total_armor += self.player_equip.helmet.defense
 
 
 
