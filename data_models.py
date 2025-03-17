@@ -6,7 +6,7 @@ from typing import List, Optional,Dict,Any
 ##########################################################################
 ##########################################################################
 ##########################################################################
-#item classes
+# Item classes
 @dataclass
 class Item:
     name: str
@@ -20,11 +20,20 @@ class Weapon(Item):
     mana_bonus: Optional[int] = None
     stealth_bonus: Optional[int] = None
     poison: Optional[int] = None
+    strenght: Optional[int] = None
+    stamina: Optional[int] = None
+    agility: Optional[int] = None
+    intelligence: Optional[int] = None
 
 @dataclass
 class Armor(Item):
     defense: int
     durability: int
+    strength: Optional[int] = None
+    stamina: Optional[int] = None
+    agility: Optional[int] = None
+    intelligence: Optional[int] = None
+    stealth_bonus: Optional[int] = None
     fire_resistance: Optional[int] = None
 
 @dataclass
@@ -37,33 +46,44 @@ class Consumable(Item):
 
 @dataclass
 class LootTable:
-    weapons: List[Weapon]
-    armors: List[Armor]
-    consumables: List[Consumable]
+    weapons: Dict[int, Weapon]
+    armors: Dict[int, Armor]
+    consumables: Dict[int, Consumable]
+
 class LootManager:
     def __init__(self):
         self.loot_table = LootTable(
-            weapons=[
-                Weapon("broken sword", "1 handed weapon", "common", random.randint(15, 20)),
-                Weapon("war axe", "1 handed weapon", "rare", random.randint(30, 40), armor_penetration=5),
-                Weapon("magical staff", "2 handed weapon", "epic", random.randint(25, 30), mana_bonus=20),
-                Weapon("dagger of shadows", "1 handed weapon", "epic", random.randint(18, 22), stealth_bonus=10, poison=5),
-            ],
-            armors=[
-                Armor("iron helmet", "helmet", "common", 5, 80),
-                Armor("steel chestplate", "chest plate", "rare", 15, 100),
-                Armor("reinforced greaves", "pants", "rare", 10, 90),
-                Armor("dragon helm", "helmet", "legendary", 25, 200, fire_resistance=10),
-                Armor("dragon chestplate", "chest plate", "legendary", 50, 300, fire_resistance=20),
-                Armor("dragon greaves", "pants", "legendary", 35, 250, fire_resistance=15),
-            ],
-            consumables=[
-                Consumable("weak healing potion", "consumable", "common", heal=25),
-                Consumable("strong healing potion", "consumable", "rare", heal=50),
-                Consumable("resistance potion", "consumable", "rare", resistance=30, duration="5 min"),
-                Consumable("mana potion", "consumable", "rare", mana_restore=50),
-                Consumable("elixir of strength", "consumable", "epic", strength_bonus=10, duration="5 min"),
-            ]
+            weapons={
+                1: Weapon("Broken Sword", "1 handed weapon", "common", damage=18),
+                2: Weapon("War Axe", "1 handed weapon", "rare", damage=35, armor_penetration=5, strenght=2),
+                3: Weapon("Magical Staff", "2 handed weapon", "epic", damage=27, mana_bonus=20, intelligence=4),
+                4: Weapon("Dagger of Shadows", "1 handed weapon", "epic", damage=20, stealth_bonus=10, poison=5, agility=3),
+                5: Weapon("Flaming Sword", "1 handed weapon", "legendary", damage=55, armor_penetration=10, strenght=5),
+                6: Weapon("Thunder Hammer", "2 handed weapon", "legendary", damage=65, strenght=5, stamina=3),
+                7: Weapon("Elven Bow", "ranged weapon", "rare", damage=30, agility=3),
+                8: Weapon("Shadow Spear", "2 handed weapon", "epic", damage=45, stealth_bonus=8, agility=4),
+                9: Weapon("Frozen Scythe", "2 handed weapon", "legendary", damage=60, intelligence=5),
+                10: Weapon("Orcish Cleaver", "1 handed weapon", "rare", damage=40, strenght=3),
+            },
+            armors={
+                101: Armor("Iron Helmet", "helmet", "common", defense=5, durability=80),
+                102: Armor("Steel Chestplate", "chest plate", "rare", defense=15, durability=100, strength=2),
+                103: Armor("Reinforced Greaves", "pants", "rare", defense=10, durability=90, stamina=2),
+                104: Armor("Dragon Helm", "helmet", "legendary", defense=25, durability=200, fire_resistance=10, strength=3),
+                105: Armor("Dragon Chestplate", "chest plate", "legendary", defense=50, durability=300, fire_resistance=20, strength=5),
+                106: Armor("Dragon Greaves", "pants", "legendary", defense=35, durability=250, fire_resistance=15, stamina=4),
+                107: Armor("Assassin Hood", "helmet", "epic", defense=8, durability=120, agility=4),
+                108: Armor("Mystic Robes", "chest plate", "epic", defense=12, durability=90, intelligence=5),
+                109: Armor("Shadow Cloak", "cloak", "legendary", defense=15, durability=150, stealth_bonus=10, agility=5),
+                110: Armor("Paladin Gauntlets", "gloves", "rare", defense=6, durability=110, strength=2),
+            },
+            consumables={
+                201: Consumable("Weak Healing Potion", "consumable", "common", heal=25),
+                202: Consumable("Strong Healing Potion", "consumable", "rare", heal=50),
+                203: Consumable("Resistance Potion", "consumable", "rare", resistance=30, duration="5 min"),
+                204: Consumable("Mana Potion", "consumable", "rare", mana_restore=50),
+                205: Consumable("Elixir of Strength", "consumable", "epic", strength_bonus=10, duration="5 min"),
+            }
         )
 ##########################################################################
 ##########################################################################
@@ -144,6 +164,10 @@ class PlaterStats:
     armor:int
     healing_per_round:int
     damage:int
+    strenght: int
+    stamina: int
+    agility: int
+    intelligence: int
 @dataclass
 class PlayerAll:
     name:str
@@ -152,7 +176,8 @@ class PlayerAll:
 
 class Player:
     def __init__(self):
-        self.player_stats = PlayerAll("Alex",PlaterStats(100,5,2,20),PlayerAbilities())
+        self.player_stats = PlayerAll("Alex",PlaterStats(100,5,2,20,strenght=10,stamina=10,agility=10,intelligence=10),PlayerAbilities())
+
 ##########################################################################
 #player equip
 @dataclass
