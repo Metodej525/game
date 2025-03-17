@@ -71,21 +71,16 @@ class PlayerStatsSetup:
 class PlayerStatSum:
     def __init__(self,player: PlayerStatsSetup):
         self.player_stats = player.stats.player_stats
-        self.player_equip = player.equip.player_equip_eable
+        self.player_equip = player.equip.player_equip_table
     def summarize(self):
-        total_health = self.player_stats.stats.health
-        total_armor = self.player_stats.stats.armor
-        total_healing = self.player_stats.stats.healing_per_round
-        total_damage = self.player_stats.stats.damage
-
-        if self.player_equip.weapon:
-            total_damage += self.player_equip.weapon.damage
-        if self.player_equip.chestplate:
-            total_armor += self.player_equip.chestplate.defense
-        if self.player_equip.pants:
-            total_armor += self.player_equip.pants.defense
-        if self.player_equip.helmet:
-            total_armor += self.player_equip.helmet.defense
+        stat_list = ["strenght", "stamina", "agility", "intelligence", "damage", "armor", "healing_per_round"]
+        for eq_slot in vars(self.player_equip).values():
+            if eq_slot:
+                for stat in stat_list:
+                    value_to_add = getattr(eq_slot, stat, None)
+                    if value_to_add is not None:
+                        player_value = getattr(self.player_stats.stats, stat)
+                        setattr(self.player_stats.stats, stat, player_value + value_to_add)
 
 
 
