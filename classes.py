@@ -1,7 +1,7 @@
 import random
 from dataclasses import dataclass
 from typing import List,Dict,Any
-from data_models import Vendor, LootManager, PlayerBagTable, Storage, Player, PlayerEquipTable
+from data_models import Vendor, LootManager, PlayerBagTable, Storage, Player, PlayerEquipTable, Encounter, EnemyManager
 
 
 class SelectMoveItem:
@@ -81,6 +81,29 @@ class PlayerStatSum:
                     if value_to_add is not None:
                         player_value = getattr(self.player_stats.stats, stat)
                         setattr(self.player_stats.stats, stat, player_value + value_to_add)
+@dataclass
+class EncounterData:
+    encouter: Encounter
+    enemies:  EnemyManager
+class EncounterGen:
+    def __init__(self,encounter_data: EncounterData,stage):
+        self.enemy_list = encounter_data.enemies.enemy_list
+        self.encounter_list = encounter_data.encouter.encounter
+        self.stage = stage
+        self.enemy_choice = ["weak","medium","strong"]
+        self.enemy_weak = []
+        self.enemy_medium = []
+        self.enemy_strong = []
+    def order_enemies(self):
+        for enemy in self.enemy_list.enemy:
+            if enemy.strength_type == "weak":
+                self.enemy_weak.append(enemy)
+            elif enemy.strength_type == "medium":
+                self.enemy_medium.append(enemy)
+            elif enemy.strength_type == "strong":
+                self.enemy_strong.append(enemy)
+    def generate_enemies(self):
+
 
 
 
