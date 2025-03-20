@@ -94,6 +94,7 @@ class EncounterGen:
         self.enemy_weak = []
         self.enemy_medium = []
         self.enemy_strong = []
+        self.enemy_stage = [self.enemy_weak,self.enemy_medium,self.enemy_strong]
     def order_enemies(self):
         for enemy in self.enemy_list.enemy:
             if enemy.strength_type == "weak":
@@ -103,6 +104,8 @@ class EncounterGen:
             elif enemy.strength_type == "strong":
                 self.enemy_strong.append(enemy)
     def generate_enemies(self):
+        for i in range(2):
+            self.enemy_list += random.choice(self.enemy_stage[self.stage])
 
 
 
