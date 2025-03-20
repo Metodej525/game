@@ -1,5 +1,6 @@
 import random
 from dataclasses import dataclass
+from os import remove
 from typing import List,Dict,Any
 from data_models import Vendor, LootManager, PlayerBagTable, Storage, Player, PlayerEquipTable, Encounter, EnemyManager
 
@@ -107,6 +108,30 @@ class EncounterGen:
         if self.enemy_stage[self.stage]:
             for _ in range(num_enemies):
                 self.encounter_list.append(random.choice(self.enemy_stage[self.stage]))
+@dataclass
+class EquipItemData:
+    item_choice: str
+    bag: PlayerBagTable
+    equip: PlayerEquipTable
+class EquipmentManager:
+    def __init__(self, mrdka: EquipItemData):
+        self.bagpack = mrdka.bag.bag
+        self.item_name = mrdka.item_choice
+        self.equipment = mrdka.equip
+
+    def find_item(self):
+        """Najde item podle jména a vrátí ho (nebo None, pokud neexistuje)"""
+        for category in vars(self.equipment).values():  # Získá všechny seznamy vybavení
+            for item in category:
+                if item.name == self.item_name:
+                    return item  # Vrátíme item namísto změny self.item
+        return None  # Když nic nenajdeme
+    def equip_item(self):
+        getattr()
+        item = self.equipment.player_equip_table.
+    def unequip_item(self):
+        pass
+
 
 
 
