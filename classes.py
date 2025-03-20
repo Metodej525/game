@@ -104,8 +104,9 @@ class EncounterGen:
             elif enemy.strength_type == "strong":
                 self.enemy_strong.append(enemy)
     def generate_enemies(self):
-        for i in range(2):
-            self.enemy_list += random.choice(self.enemy_stage[self.stage])
+        if self.enemy_stage[self.stage]:
+            for _ in range(2):
+                self.encounter_list.append(random.choice(self.enemy_stage[self.stage]))
 
 
 
